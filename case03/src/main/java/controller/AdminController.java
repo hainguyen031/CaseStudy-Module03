@@ -15,7 +15,7 @@ import java.util.List;
 
 @WebServlet(name = "AdminController", urlPatterns = "/admin")
 public class AdminController extends HttpServlet {
-    private CarServiceImpl carService = new CarServiceImpl();
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -32,9 +32,9 @@ public class AdminController extends HttpServlet {
             case "editCar":
                 showEditCarForm(request, response);
                 break;
-            case "deleteCar":
-                showDeleteCarForm(request, response);
-                break;
+//            case "deleteCar":
+//                showDeleteCarForm(request, response);
+//                break;
 //            case "searchTypeByName":
 //                searchBrandByName(request, response);
 //                break;
@@ -60,7 +60,7 @@ public class AdminController extends HttpServlet {
                 editCar(request, response);
                 break;
             case "deleteCar":
-                deleteBrand(request, response);
+                deleteCar(request, response);
                 break;
 //            case "searchBrandByName":
 //                searchBrandByName(request, response);
@@ -72,9 +72,9 @@ public class AdminController extends HttpServlet {
     }
 
     private void listCars(HttpServletRequest request, HttpServletResponse response) {
-        List<Car> carList = carService.findAll();
+        List<Car> carList = CarServiceImpl.getInstance().findAll();
         request.setAttribute("carList", carList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("car/listCar.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/viewAdmin.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
@@ -93,7 +93,7 @@ public class AdminController extends HttpServlet {
 
     private void showEditCarForm(HttpServletRequest request, HttpServletResponse response) {
         int carId = Integer.parseInt(request.getParameter("id"));
-        Car car = carService.selectCar(carId);
+        Car car = CarServiceImpl.getInstance().selectCar(carId);
         request.setAttribute("car", car);
         RequestDispatcher dispatcher = request.getRequestDispatcher("car/editCar.jsp");
         try {
@@ -103,29 +103,30 @@ public class AdminController extends HttpServlet {
         }
     }
 
-    private void showDeleteCarForm(HttpServletRequest request, HttpServletResponse response) {
-        int carId = Integer.parseInt(request.getParameter("brandId"));
-        Car car = carService.selectCar(carId);
-        request.setAttribute("car", car);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("car/deleteCar.jsp");
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException | IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void showDeleteCarForm(HttpServletRequest request, HttpServletResponse response) {
+//        int carId = Integer.parseInt(request.getParameter("brandId"));
+//        Car car = CarServiceImpl.getInstance().selectCar(carId);
+//        request.setAttribute("car", car);
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("car/deleteCar.jsp");
+//        try {
+//            dispatcher.forward(request, response);
+//        } catch (ServletException | IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void addNewCar(HttpServletRequest request, HttpServletResponse response) {
-        int carId = Integer.parseInt(request.getParameter("id"));
         String carBrand = request.getParameter("brand");
         String carModel = request.getParameter("model");
         int carSeat = Integer.parseInt(request.getParameter("seat"));
-        int carRentalPrice = Integer.parseInt(request.getParameter("rentalPrice"));
+        int carRentalPrice = Integer.parseInt(request.getParameter("price"));
         boolean carAvailable = Boolean.parseBoolean(request.getParameter("available"));
         String carDescribe = request.getParameter("describe");
+        String carURL = request.getParameter("url");
+        String carLocation = request.getParameter("location");
 
-        Car car = new Car(carId, carBrand, carModel, carSeat, carRentalPrice, carAvailable, carDescribe);
-        carService.addNewCar(car);
+        Car car = new Car(carBrand, carModel, carSeat, carRentalPrice, carAvailable, carDescribe, carURL, carLocation);
+        CarServiceImpl.getInstance().addNewCar(car);
         RequestDispatcher dispatcher = request.getRequestDispatcher("car/addNewCar.jsp");
         request.setAttribute("message", "Add New Car Successfully!");
         try {
@@ -135,41 +136,49 @@ public class AdminController extends HttpServlet {
         }
     }
 
-    private void editCar(HttpServletRequest request, HttpServletResponse response) {
-        int carId = Integer.parseInt(request.getParameter("carId"));
-        String carBrand = request.getParameter("brand");
-        String brandModel = request.getParameter("model");
-        int carSeat = Integer.parseInt(request.getParameter("seat"));
-        int carRentalPrice = Integer.parseInt(request.getParameter("rentalPrice"));
-        boolean carAvailable = Boolean.parseBoolean(request.getParameter("available"));
-        String carDescribe = request.getParameter("describe");
-        Car car = carService.searchCarById(carId);
-        car.setId(carId);
-        car.setBrand(carBrand);
-        car.setModel(brandModel);
-        car.setSeats(carSeat);
-        car.setRentPrice(carRentalPrice);
-        car.setAvailable(carAvailable);
-        car.setDescribe(carDescribe);
-        try {
-            carService.update(carId, car);
-            request.setAttribute("car ", car);
-            request.setAttribute("message", "Brand information was updated!");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("brand/editBrand.jsp");
-            dispatcher.forward(request, response);
-        } catch (ServletException | IOException e) {
-            e.printStackTrace();
-        }
+    private void editCar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        int carId = Integer.parseInt(request.getParameter("carId"));
+//        String carBrand = request.getParameter("brand");
+//        String brandModel = request.getParameter("model");
+//        int carSeat = Integer.parseInt(request.getParameter("seat"));
+//        int carRentalPrice = Integer.parseInt(request.getParameter("rental_price"));
+//        boolean carAvailable = Boolean.parseBoolean(request.getParameter("available"));
+//        String carDescribe = request.getParameter("describe");
+//        Car car = CarServiceImpl.getInstance().searchCarById(carId);
+//        car.setId(carId);
+//        car.setBrand(carBrand);
+//        car.setModel(brandModel);
+//        car.setSeats(carSeat);
+//        car.setRentPrice(carRentalPrice);
+//        car.setAvailable(carAvailable);
+//        car.setDescribe(carDescribe);
+//        try {
+//            CarServiceImpl.getInstance().update(carId, car);
+//            request.setAttribute("car ", car);
+//            request.setAttribute("message", "Brand information was updated!");
+//            RequestDispatcher dispatcher = request.getRequestDispatcher("brand/editCar.jsp");
+//            dispatcher.forward(request, response);
+//        } catch (ServletException | IOException e) {
+//            e.printStackTrace();
+//        }
+
+        int id = Integer.parseInt(request.getParameter("id"));
+        int rentPrice = Integer.parseInt(request.getParameter("rentPrice"));
+        String describe = request.getParameter("describe");
+        String url = request.getParameter("url");
+        Car car = new Car(id, rentPrice, describe, url);
+        CarServiceImpl.getInstance().updateCar(car);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/viewAdmin.jsp");
+        dispatcher.forward(request, response);
     }
 
-    private void deleteBrand(HttpServletRequest request, HttpServletResponse response) {
-        int carId = Integer.parseInt(request.getParameter("carId"));
-        try {
-            carService.delete(carId);
-            response.sendRedirect("/admin");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void deleteCar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int carId = Integer.parseInt(request.getParameter("id"));
+        CarServiceImpl.getInstance().delete(carId);
+        List<Car> carList = CarServiceImpl.getInstance().findAll();
+        request.setAttribute("carList", carList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("car/editCar.jsp");
+        dispatcher.forward(request, response);
     }
 
 

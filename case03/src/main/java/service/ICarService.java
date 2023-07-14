@@ -2,6 +2,7 @@ package service;
 
 import entity.Car;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface ICarService {
@@ -15,5 +16,9 @@ public interface ICarService {
 
     void update(int carId, Car car);
 
-    void delete(int carId);
+    boolean delete(int carId);
+
+    List<Car> searchCarByForm(int seat, String pickupLocation, Date rentailDate, Date returnDate);
+
+    void updateCar(Car car);
 }

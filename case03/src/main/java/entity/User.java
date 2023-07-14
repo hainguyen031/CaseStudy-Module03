@@ -6,25 +6,17 @@ public class User {
     private String password;
     private String phone;
     private String email;
-    private String address;
+
     public User() {
     }
 
-    public User(int id, String username, String password, String phone, String email, String address) {
+    public User(int id, String username, String password, String phone, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-    }
 
-    public User(String username, String password, String phone, String email, String address) {
-        this.username = username;
-        this.password = password;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
     }
 
     public User(String username, String password, String phone, String email) {
@@ -32,7 +24,9 @@ public class User {
         this.password = password;
         this.phone = phone;
         this.email = email;
+
     }
+
     public User(int id, String username, String password) {
         this.id = id;
         this.username = username;
@@ -86,11 +80,7 @@ public class User {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
-    }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+
+
 }

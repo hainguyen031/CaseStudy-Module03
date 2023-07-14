@@ -7,6 +7,7 @@ import service.Impl.CustomerServiceImpl;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +15,6 @@ import java.io.IOException;
 
 @WebServlet(name = "UserController", urlPatterns = "/user")
 public class UserController extends HttpServlet {
-    private ICustomerService iCustomerService = new CustomerServiceImpl();
     CustomerServiceImpl customerService = new CustomerServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,12 +54,12 @@ public class UserController extends HttpServlet {
     }
 
     private void loginForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("customer/login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/login.jsp");
         dispatcher.forward(request, response);
     }
 
     private void registerForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("customer/register.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/register.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -70,17 +70,24 @@ public class UserController extends HttpServlet {
         User customerFind = customerService.findCustomerByUsername(username);
         if (username.equals("admin") && password.equals("admin")) {
             request.setAttribute("message", customerFind.getUsername());
-            response.sendRedirect("/decks");
+            response.sendRedirect("/admin");
         } else if (username.equals(customerFind.getUsername()) && password.equals(customerFind.getPassword())) {
+            Cookie cookieUsername = new Cookie("cookieUsername", username);
+            Cookie cookiePassword = new Cookie("cookiePassword", password);
+            cookieUsername.setMaxAge(60*60*24);
+            cookiePassword.setMaxAge(60*60*24);
+            response.addCookie(cookieUsername);
+            response.addCookie(cookiePassword);
             request.setAttribute("message", customerFind.getUsername());
-            response.sendRedirect("/home");
+            request.getSession().setAttribute("customerFind", customerFind);
+            response.sendRedirect("/customer");
         } else if (username.equals("") || password.equals("")) {
             dispatcher = request.getRequestDispatcher("user/login.jsp");
-            request.setAttribute("message", "Wrong Information! Please try again!");
+            request.setAttribute("message", "Wrong Username or Password! Please try again!");
             dispatcher.forward(request, response);
         } else {
             dispatcher = request.getRequestDispatcher("user/login.jsp");
-            request.setAttribute("message", "Wrong Information! Please try again!");
+            request.setAttribute("message", "Wrong Username or Password! Please try again!");
             dispatcher.forward(request, response);
         }
     }
@@ -88,13 +95,12 @@ public class UserController extends HttpServlet {
     private void register(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String customerEmail = request.getParameter("email");
         String customerPhone = request.getParameter("phone");
-        String customerAddress = request.getParameter("address");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        User customer = new User(username, password, customerPhone, customerEmail, customerAddress);
-        if (!customer.getUsername().equals("") && !customer.getPassword().equals("") && !customer.getPhone().equals("") && !customer.getEmail().equals("") && !customer.getAddress().equals("")) {
+        User customer = new User(username, password, customerPhone, customerEmail);
+        if (!customer.getUsername().equals("") && !customer.getPassword().equals("") && !customer.getPhone().equals("") && !customer.getEmail().equals("")) {
             customerService.registerNewCustomer(customer);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("user/register.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             request.setAttribute("message", "Register Successfully!");
             dispatcher.forward(request, response);
         } else {

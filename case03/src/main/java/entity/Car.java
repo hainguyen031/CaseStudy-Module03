@@ -9,18 +9,12 @@ public class Car {
     private int rentPrice;
     private boolean available = true;
     private String describe;
+    private String url;
+    private String carLocation;
     public Car() {
     }
 
-    public Car(String brand, String model, int seats, int rentPrice, boolean available) {
-        this.brand = brand;
-        this.model = model;
-        this.seats = seats;
-        this.rentPrice = rentPrice;
-        this.available = available;
-    }
-
-    public Car(int id, String brand, String model, int seats, int rentPrice, boolean available, String describe) {
+    public Car(int id, String brand, String model, int seats, int rentPrice, boolean available, String describe, String url, String carLocation) {
         this.id = id;
         this.brand = brand;
         this.model = model;
@@ -28,14 +22,28 @@ public class Car {
         this.rentPrice = rentPrice;
         this.available = available;
         this.describe = describe;
+        this.url = url;
+        this.carLocation = carLocation;
     }
-    public Car(int id, String brand, String model, int seats, int rentPrice) {
-        this.id = id;
+
+    public Car(String brand, String model, int seats, int rentPrice, boolean available, String describe, String url, String carLocation) {
         this.brand = brand;
         this.model = model;
         this.seats = seats;
         this.rentPrice = rentPrice;
+        this.available = available;
+        this.describe = describe;
+        this.url = url;
+        this.carLocation = carLocation;
     }
+
+    public Car(int id, int rentPrice, String describe, String url) {
+        this.id = id;
+        this.rentPrice = rentPrice;
+        this.describe = describe;
+        this.url = url;
+    }
+
     public int getId() {
         return id;
     }
@@ -91,6 +99,22 @@ public class Car {
 
     public void setDescribe(String describe) {
         this.describe = describe;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getCarLocation() {
+        return carLocation;
+    }
+
+    public void setCarLocation(String carLocation) {
+        this.carLocation = carLocation;
     }
 
     @Override
