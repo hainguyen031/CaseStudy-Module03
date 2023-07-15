@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Car Rental with the Bests Prices</title>
     <!--vendor css ================================================== -->
     <link rel="stylesheet" type="text/css" href="css/vendor.css">
     <link rel="stylesheet" type="text/css" href="css/detailCar.css">
@@ -33,7 +33,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<% User user = (User) request.getAttribute("user"); %>
+<%--<% User user = (User) request.getAttribute("user"); %>--%>
 
 
 <%--<%--%>
@@ -89,9 +89,9 @@
                     <ul class="navbar-nav justify-content-end align-items-center">
                         <li class="nav-item">
                             <a class="nav-link px-3" href="#"> Welcome
-                                <b><%= user.getUsername()%>
-                                </b>
+<%--                                <b><%= user.getUsername()%></b>--%>
                             </a>
+
                         </li>
                     </ul>
                 </div>
@@ -129,9 +129,9 @@
                             <div class="modal-dialog modal-dialog-centered modal-fullscreen modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header" style="margin-top: 6%">
-                                        <h5 class="modal-title" id="carDetailModalLabel" style="margin-left: 10%;">
+                                        <h3 class="modal-title" id="carDetailModalLabel" style="margin-left: 10%;">
                                             CAR DETAILS
-                                        </h5>
+                                        </h3>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                     </div>
@@ -167,8 +167,8 @@
                                             <div class="row">
                                                 <div class="col-sm-8">
                                                     <div class="main-content">
-                                                        <h2><%= car.getBrand() %> <%= car.getModel() %>
-                                                        </h2>
+                                                        <h4><%= car.getBrand() %> <%= car.getModel() %>
+                                                        </h4>
                                                         <hr>
                                                         <h4>Characteristic</h4>
                                                         <div class="row">
@@ -501,6 +501,19 @@
         System.out.println("Khong co ds xe");
     }%>
 </div>
+
+<!-- script ================================================== -->
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
 <script src="js/detailCar.js"></script>
 </body>
 </html>

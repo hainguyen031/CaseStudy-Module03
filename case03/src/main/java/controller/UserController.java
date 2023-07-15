@@ -50,6 +50,10 @@ public class UserController extends HttpServlet {
             case "register":
                 registerForm(request, response);
                 break;
+            case "logout":
+                request.getSession().removeAttribute("customerFind");
+                request.getRequestDispatcher("user/login.jsp").forward(request, response);
+                break;
         }
     }
 
@@ -66,6 +70,7 @@ public class UserController extends HttpServlet {
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String rememberMe = request.getParameter("rememberMe");
         RequestDispatcher dispatcher;
         User customerFind = customerService.findCustomerByUsername(username);
         if (username.equals("admin") && password.equals("admin")) {
@@ -78,7 +83,7 @@ public class UserController extends HttpServlet {
             cookiePassword.setMaxAge(60*60*24);
             response.addCookie(cookieUsername);
             response.addCookie(cookiePassword);
-            request.setAttribute("message", customerFind.getUsername());
+//            request.setAttribute("message", customerFind.getUsername());
             request.getSession().setAttribute("customerFind", customerFind);
             response.sendRedirect("/customer");
         } else if (username.equals("") || password.equals("")) {

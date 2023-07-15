@@ -10,11 +10,14 @@ public class Car {
     private boolean available = true;
     private String describe;
     private String url;
+    private String url2;
+    private String url3;
+    private String url4;
     private String carLocation;
     public Car() {
     }
 
-    public Car(int id, String brand, String model, int seats, int rentPrice, boolean available, String describe, String url, String carLocation) {
+    public Car(int id, String brand, String model, int seats, int rentPrice, boolean available, String describe, String url, String url2, String url3, String url4, String carLocation) {
         this.id = id;
         this.brand = brand;
         this.model = model;
@@ -23,10 +26,13 @@ public class Car {
         this.available = available;
         this.describe = describe;
         this.url = url;
+        this.url2 = url2;
+        this.url3 = url3;
+        this.url4 = url4;
         this.carLocation = carLocation;
     }
 
-    public Car(String brand, String model, int seats, int rentPrice, boolean available, String describe, String url, String carLocation) {
+    public Car(String brand, String model, int seats, int rentPrice, boolean available, String describe, String url, String url2, String url3, String url4, String carLocation) {
         this.brand = brand;
         this.model = model;
         this.seats = seats;
@@ -34,14 +40,20 @@ public class Car {
         this.available = available;
         this.describe = describe;
         this.url = url;
+        this.url2 = url2;
+        this.url3 = url3;
+        this.url4 = url4;
         this.carLocation = carLocation;
     }
 
-    public Car(int id, int rentPrice, String describe, String url) {
+    public Car(int id, int rentPrice, String describe, String url, String url2, String url3, String url4) {
         this.id = id;
         this.rentPrice = rentPrice;
         this.describe = describe;
         this.url = url;
+        this.url2 = url2;
+        this.url3 = url3;
+        this.url4 = url4;
     }
 
     public int getId() {
@@ -107,6 +119,30 @@ public class Car {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getUrl2() {
+        return url2;
+    }
+
+    public void setUrl2(String url2) {
+        this.url2 = url2;
+    }
+
+    public String getUrl3() {
+        return url3;
+    }
+
+    public void setUrl3(String url3) {
+        this.url3 = url3;
+    }
+
+    public String getUrl4() {
+        return url4;
+    }
+
+    public void setUrl4(String url4) {
+        this.url4 = url4;
     }
 
     public String getCarLocation() {

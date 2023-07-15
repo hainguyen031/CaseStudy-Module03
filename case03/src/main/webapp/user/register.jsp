@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Raleway:wght@400;700&display=swap"
           rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 <div class="sidenav">
@@ -28,26 +29,26 @@
             <form autocomplete="off" method="post" action="/user?action=register">
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" class="form-control" name="username" id="username" placeholder="username">
+                    <input type="text" class="form-control" name="username" id="username" placeholder="username" required>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="********">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="********" required>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="username@gmail.com">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="username@gmail.com" required>
                 </div>
                 <div class="form-group">
                     <label>Phone</label>
-                    <input type="text" class="form-control" name="phone" id="phone" placeholder="0982314526">
+                    <input type="text" class="form-control" name="phone" id="phone" placeholder="0982314526" required>
                 </div>
 <%--                <div class="form-group">--%>
 <%--                    <label>Password</label>--%>
 <%--                    <input type="password" class="form-control" name="ab" id="ab" placeholder="********">--%>
 <%--                </div>--%>
                 <input type="submit" class="btn btn-black" value="Register">
-<%--                <a href="/users?action=login" class="btn btn-secondary">Login</a>--%>
+                <a href="/user?action=login" class="btn btn-secondary">Login</a>
             </form>
         </div>
         <div>

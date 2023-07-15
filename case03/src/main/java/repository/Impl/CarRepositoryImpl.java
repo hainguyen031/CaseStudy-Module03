@@ -17,9 +17,9 @@ public class CarRepositoryImpl implements ICarRepository {
 
     private static final String SELECT_ALL_CAR_SQL = "{CALL selectAllCarSQL()}";
     private static final String SELECT_CAR_BY_ID = "{CALL searchCarById(?)}";
-    private static final String ADD_NEW_CAR = "{CALL addNewCar(?,?,?,?,?,?,?,?)}";
+    private static final String ADD_NEW_CAR = "{CALL addNewCar(?,?,?,?,?,?,?,?,?,?,?)}";
     private static final String SEARCH_CAR_BY_ID = "{CALL searchCarById(?)}";
-    private static final String UPDATE_CAR_BY_ID = "{CALL updateCarById(?,?,?,?)}";
+    private static final String UPDATE_CAR_BY_ID = "{CALL updateCarById(?,?,?,?,?,?,?)}";
     private static final String DELETE_CAR_BY_ID = "{CALL deleteCarById(?)}";
     private static final String SEARCH_CAR_BY_FORM = "{CALL searchCarByForm(?,?,?,?)}";
 
@@ -40,8 +40,11 @@ public class CarRepositoryImpl implements ICarRepository {
                 boolean carAvailable = rs.getBoolean("available");
                 String carDescribe = rs.getString("describe");
                 String carUrl = rs.getString("url");
+                String carUrl2 = rs.getString("url2");
+                String carUrl3 = rs.getString("url3");
+                String carUrl4 = rs.getString("url4");
                 String carLocation = rs.getString("car_location");
-                cars.add(new Car(carId, carBrand, carModel, carSeat, carRentalPrice, carAvailable, carDescribe, carUrl, carLocation));
+                cars.add(new Car(carId, carBrand, carModel, carSeat, carRentalPrice, carAvailable, carDescribe, carUrl, carUrl2, carUrl3, carUrl4, carLocation));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -64,8 +67,11 @@ public class CarRepositoryImpl implements ICarRepository {
                 boolean carAvailable = rs.getBoolean("available");
                 String carDescribe = rs.getString("describe");
                 String carUrl = rs.getString("url");
+                String carUrl2 = rs.getString("url2");
+                String carUrl3 = rs.getString("url3");
+                String carUrl4 = rs.getString("url4");
                 String carLocation = rs.getString("car_location");
-                car = new Car(carId, carBrand, carModel, carSeat, carRentalPrice, carAvailable, carDescribe, carUrl, carLocation);
+                car = new Car(carId, carBrand, carModel, carSeat, carRentalPrice, carAvailable, carDescribe, carUrl, carUrl2, carUrl3, carUrl4, carLocation);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -84,7 +90,10 @@ public class CarRepositoryImpl implements ICarRepository {
             callableStatement.setBoolean(5, car.getAvailable());
             callableStatement.setString(6, car.getDescribe());
             callableStatement.setString(7, car.getUrl());
-            callableStatement.setString(8, car.getCarLocation());
+            callableStatement.setString(8, car.getUrl2());
+            callableStatement.setString(9, car.getUrl3());
+            callableStatement.setString(10, car.getUrl4());
+            callableStatement.setString(11, car.getCarLocation());
             callableStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,8 +115,11 @@ public class CarRepositoryImpl implements ICarRepository {
                 boolean carAvailable = rs.getBoolean("available");
                 String carDescribe = rs.getString("describe");
                 String carUrl = rs.getString("url");
+                String carUrl2 = rs.getString("url2");
+                String carUrl3 = rs.getString("url3");
+                String carUrl4 = rs.getString("url4");
                 String carLocation = rs.getString("car_location");
-                car = new Car(carId, carBrand, carModel, carSeat, carRentalPrice, carAvailable, carDescribe, carUrl, carLocation);
+                car = new Car(carId, carBrand, carModel, carSeat, carRentalPrice, carAvailable, carDescribe, carUrl, carUrl2, carUrl3, carUrl4, carLocation);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -127,7 +139,10 @@ public class CarRepositoryImpl implements ICarRepository {
 //            callableStatement.setBoolean(6, car.getAvailable());
             callableStatement.setString(6, car.getDescribe());
             callableStatement.setString(7, car.getUrl());
-            callableStatement.setString(8, car.getCarLocation());
+            callableStatement.setString(8, car.getUrl2());
+            callableStatement.setString(9, car.getUrl3());
+            callableStatement.setString(10, car.getUrl4());
+            callableStatement.setString(11, car.getCarLocation());
             callableStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -166,8 +181,11 @@ public class CarRepositoryImpl implements ICarRepository {
                 boolean carAvailable = rs.getBoolean("available");
                 String carDescribe = rs.getString("describe");
                 String carUrl = rs.getString("url");
+                String carUrl2 = rs.getString("url2");
+                String carUrl3 = rs.getString("url3");
+                String carUrl4 = rs.getString("url4");
                 String carLocation = rs.getString("car_location");
-                car = new Car(carId, carBrand, carModel, carSeat, carRentalPrice, carAvailable, carDescribe, carUrl, carLocation);
+                car = new Car(carId, carBrand, carModel, carSeat, carRentalPrice, carAvailable, carDescribe, carUrl, carUrl2, carUrl3, carUrl4, carLocation);
                 cars.add(car);
             }
         } catch (SQLException e) {
@@ -184,6 +202,9 @@ public class CarRepositoryImpl implements ICarRepository {
         callableStatement.setInt(2, car.getRentPrice());
         callableStatement.setString(3, car.getDescribe());
         callableStatement.setString(4, car.getUrl());
+            callableStatement.setString(5, car.getUrl2());
+            callableStatement.setString(6, car.getUrl3());
+            callableStatement.setString(7, car.getUrl4());
         callableStatement.executeUpdate();
     } catch (SQLException e) {
         e.printStackTrace();

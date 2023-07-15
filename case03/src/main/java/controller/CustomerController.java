@@ -4,6 +4,7 @@ import entity.Booking;
 import entity.Car;
 import entity.User;
 import repository.Impl.CustomerRepositoryImpl;
+import service.Impl.BookingServiceImpl;
 import service.Impl.CarServiceImpl;
 import service.Impl.CustomerServiceImpl;
 
@@ -37,9 +38,9 @@ public class CustomerController extends HttpServlet {
             case "searchCar":
                 searchCarFrom(request, response);
                 break;
-//            case "sortCar":
-////                sortCarForm(request, response);
-//                break;
+            case "showBooking":
+                showBooking(request, response);
+                break;
 //            case "deleteCar":
 //                showDeleteCarForm(request, response);
 //                break;
@@ -70,9 +71,9 @@ public class CustomerController extends HttpServlet {
             case "searchCar":
                 searchCar(request, response);
                 break;
-//            case "sortCar":
-//                sortCar(request, response);
-//                break;
+            case "showBooking":
+                showBooking(request, response);
+                break;
 //            case "bookingCar":
 //                bookingCar(request, response);
 //                break;
@@ -102,27 +103,16 @@ public class CustomerController extends HttpServlet {
         Booking booking = new Booking(userId, carId, rentailDate, returnDate, cccd, gplx, pickupLocation);
         customerService.addNewBooking(booking);
         request.setAttribute("successMessage", "Book car successful");
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("car/listCar.jsp");
-//        try {
-//            dispatcher.forward(request, response);
-//        } catch (ServletException | IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
-    }
-
-//    private void bookingCar(HttpServletRequest request, HttpServletResponse response) {
-//        int carId = Integer.parseInt(request.getParameter("carId"));
-//        Car car = CarServiceImpl.getInstance().searchCarById(carId);
-//        request.setAttribute("car", car);
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("booking/booking.jsp");
+        listCars(request, response);
+//        request.setAttribute("user", user);
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("common/homePage.jsp");
 //        try {
 //            dispatcher.forward(request, response);
 //        } catch (ServletException | IOException e) {
 //            e.printStackTrace();
 //        }
-//
-//    }
+    }
+
 
     private void searchCar(HttpServletRequest request, HttpServletResponse response) {
         int seat = Integer.parseInt(request.getParameter("carType"));
@@ -133,18 +123,13 @@ public class CustomerController extends HttpServlet {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/M/d");
         LocalDate rentailDate = LocalDate.parse(rentalDateStr, formatter);
         LocalDate returnDate = LocalDate.parse(returnDateStr, formatter);
-//        Date rentailDate = null;
-//        Date returnDate = null;
-//        try {
-//            rentailDate = dateFormat.parse(rentalDateStr);
-//            returnDate = dateFormat.parse(returnDateStr);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
+
         List<Car> carList = CarServiceImpl.getInstance().searchCarByForm(seat, pickupLocation,
                 Date.valueOf(rentailDate), Date.valueOf(returnDate));
         request.setAttribute("carList", carList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("car/listCar.jsp");
+        User user = (User) request.getSession().getAttribute("customerFind");
+        request.setAttribute("user", user);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("common/homePage.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
@@ -158,7 +143,7 @@ public class CustomerController extends HttpServlet {
         User user = (User) request.getSession().getAttribute("customerFind");
 //        System.out.println(user.getUsername());
         request.setAttribute("user", user);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("car/listCar.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("common/homePage.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
@@ -166,6 +151,18 @@ public class CustomerController extends HttpServlet {
         }
     }
 
-
+    private void showBooking(HttpServletRequest request, HttpServletResponse response) {
+        User user = (User) request.getSession().getAttribute("customerFind");
+        int userId = user.getId();
+        List<Booking> bookingList = BookingServiceImpl.getInstance().findBookingByUserID(userId);
+        request.setAttribute("bookingList", bookingList);
+        request.setAttribute("user", user);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("booking/showBooking.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

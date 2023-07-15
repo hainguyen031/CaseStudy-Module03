@@ -37,7 +37,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg  navbar-light container-fluid py-3 position-fixed ">
+<nav class="navbar navbar-expand-lg  navbar-light container-fluid py-3 position-fixed">
     <div class="container">
         <a class="navbar-brand" href="/admin"><img src="images/logo.png" alt="logo"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -53,13 +53,10 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav align-items-center justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link active px-3" aria-current="page" href="#">Home</a>
+                        <a class="nav-link px-3" href="/admin">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3" href="#">Booking</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3" href="#">About</a>
+                        <a class="nav-link px-3" href="/admin?action=addNewCar">Add Car</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link px-3" href="#">Cars</a>
@@ -68,7 +65,10 @@
                         <a class="nav-link px-3" href="#services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3" href="#action">Contact</a>
+                        <%--                        <a class="nav-link px-3" href="/user?action=login">Logout</a>--%>
+                        <button type="button" class="btn btn-outline-primary nav-button mx-3"
+                                onclick="window.location.href = '/user?action=login';"> Logout
+                        </button>
                     </li>
                 </ul>
 
@@ -82,9 +82,9 @@
 <div align="center">
     <form method="post" action="/admin?action=addNewCar">
         <caption>
-            <h2>Add New Car</h2>
+            <h2 style="padding-top: 100px">Add New Car</h2>
         </caption>
-        <table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 6%">
+        <table class="table table-hover" border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 16px; width: 60%">
 
             <tr>
                 <th>Car brand:</th>
@@ -111,7 +111,7 @@
                 <th>Rental price:</th>
                 <td>
                     <input type="text" name="price" id="price" size="45"/>
-                    <input type="hidden" value="0" name="available">
+                    <input type="hidden" value="true" name="available">
                 </td>
             </tr>
             <tr>
@@ -131,6 +131,24 @@
                 </td>
             </tr>
             <tr>
+                <th>Images URL2:</th>
+                <td>
+                    <input type="text" name="url2" id="url2" size="45"/>
+                </td>
+            </tr>
+            <tr>
+                <th>Images URL3:</th>
+                <td>
+                    <input type="text" name="url3" id="url3" size="45"/>
+                </td>
+            </tr>
+            <tr>
+                <th>Images URL4:</th>
+                <td>
+                    <input type="text" name="url4" id="url4" size="45"/>
+                </td>
+            </tr>
+            <tr>
                 <th>Describe:</th>
                 <td>
                     <textarea name="describe" rows="4" cols="45"></textarea>
@@ -138,11 +156,31 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-secondary">Save</button>
                 </td>
             </tr>
         </table>
     </form>
 </div>
+
+<!-- Footer Section Starts -->
+<section id="footer">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center border-top"></footer>
+
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 pt-4">
+            <div class="col-md-6 d-flex align-items-center">
+                <p>© 2023 GoCar - All rights reserved</p>
+
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-end">
+                <p class="">© 2023 Designed By:<a href="#" class="website-link"
+                                                  target="_blank"> <b><u>HaiNguyen-CG</u></b></a></p>
+            </div>
+
+        </footer>
+    </div>
+</section>
+
 </body>
 </html>

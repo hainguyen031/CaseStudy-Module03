@@ -1,6 +1,10 @@
 package service.Impl;
 
+import entity.Booking;
+import repository.Impl.BookingRepositoryImpl;
 import service.IBookingService;
+
+import java.util.List;
 
 public class BookingServiceImpl implements IBookingService {
     private static final BookingServiceImpl bookingServiceImpl = new BookingServiceImpl();
@@ -10,5 +14,8 @@ public class BookingServiceImpl implements IBookingService {
     }
 
 
-
+    @Override
+    public List<Booking> findBookingByUserID(int userId) {
+        return BookingRepositoryImpl.getInstance().findBookingByUserID(userId);
+    }
 }
