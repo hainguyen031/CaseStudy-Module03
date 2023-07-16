@@ -1,6 +1,7 @@
 package repository.Impl;
 
 import entity.Booking;
+import entity.Car;
 import repository.ConnectionConfig;
 import repository.IBookingRepository;
 
@@ -20,6 +21,7 @@ public class BookingRepositoryImpl implements IBookingRepository {
     }
     Connection connection = ConnectionConfig.getConnection();
     private static final String FIND_BOOKING_BY_USERID = "{CALL findBookingByUserID(?)}";
+    private static final String SELECT_ALL_BOOKING_SQL = "{CALL selectAllBookingSQL()}";
 
 
     @Override
@@ -45,6 +47,33 @@ public class BookingRepositoryImpl implements IBookingRepository {
                 bookingList.add(booking);
             }
         }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookingList;
+    }
+
+    @Override
+    public List<Booking> findAllBooking() {
+        List<Booking> bookingList = new ArrayList<>();
+        try {
+            CallableStatement callableStatement = connection.prepareCall(SELECT_ALL_BOOKING_SQL);
+            ResultSet rs = callableStatement.executeQuery();
+            while (rs.next()) {
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                String phone = rs.getString("phone");
+                String cccd = rs.getString("cccd");
+                String gplx = rs.getString("gplx");
+                String pickupLocation = rs.getString("pickup_location");
+                String brand = rs.getString("brand");
+                String model = rs.getString("model");
+                int rentPrice = Integer.parseInt(rs.getString("rental_price"));
+                LocalDate startDate = LocalDate.parse(rs.getString("startdate"));
+                LocalDate endDate = LocalDate.parse(rs.getString("enddate"));
+                Booking booking = new Booking(username, email, phone, cccd, gplx, pickupLocation, brand, model, rentPrice, startDate, endDate);
+                bookingList.add(booking);
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return bookingList;

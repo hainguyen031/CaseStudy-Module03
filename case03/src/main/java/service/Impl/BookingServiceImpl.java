@@ -18,4 +18,9 @@ public class BookingServiceImpl implements IBookingService {
     public List<Booking> findBookingByUserID(int userId) {
         return BookingRepositoryImpl.getInstance().findBookingByUserID(userId);
     }
+
+    @Override
+    public List<Booking> findAllBooking() {
+        return BookingRepositoryImpl.getInstance().findAllBooking();
+    }
 }

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IBookingRepository {
     List<Booking> findBookingByUserID(int userId);
+
+    List<Booking> findAllBooking();
 }

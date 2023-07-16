@@ -42,7 +42,7 @@
 <body>
 <% User user = (User) request.getAttribute("user"); %>
 
-<nav class="navbar navbar-expand-lg  navbar-light container-fluid py-3 position-fixed ">
+<nav class="navbar navbar-expand-lg  navbar-light container-fluid py-3 position-fixed " style="z-index: 100">
     <div class="container">
         <a class="navbar-brand" href="/customer?action=listCars"><img src="images/logo.png" alt="logo"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -188,6 +188,7 @@
             <%= errorMessage %>
         </div>
         <% } %>
+
         <h2 class=" text-center my-5">cars for <span class="text-primary"> rental </span></h2>
         <div class="row justify-content-center mb-4">
             <% int count = 0; %>
@@ -208,7 +209,8 @@
                             <h4 class="card-title">
                                 <!-- mở modal -->
                                 <a href="#" data-bs-toggle="modal"
-                                   data-bs-target="#carDetailModal<%= count %>"><%= car.getBrand() %> <%= car.getModel() %>
+                                   data-bs-target="#carDetailModal<%= count %>">
+                                    <%= car.getBrand() %> <%= car.getModel() %>
                                 </a>
 
                                 <!-- Modal -->
@@ -216,24 +218,25 @@
                                      aria-labelledby="carDetailModalLabel<%= count %>" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-fullscreen modal-dialog-scrollable">
                                         <div class="modal-content">
-                                            <div class="modal-header" style="margin-top: 6%">
+                                            <div class="modal-header" style="z-index: 200">
                                                 <h3 class="modal-title" id="carDetailModalLabel" style="margin-left: 10%;">
                                                     CAR DETAILS
                                                 </h3>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body" >
                                                 <!-- Ảnh xe -->
                                                 <div class="display-container">
 
-                                                    <img class="mySlides3" src="<%= car.getUrl() %>">
                                                     <img class="mySlides3"
-                                                         src="<%= car.getUrl2() %>">
+                                                         src="<%=car.getUrl()%>">
                                                     <img class="mySlides3"
-                                                         src="<%= car.getUrl3() %>">
+                                                         src="<%=car.getUrl2()%>">
                                                     <img class="mySlides3"
-                                                         src="<%= car.getUrl4() %>">
+                                                         src="<%=car.getUrl3()%>">
+                                                    <img class="mySlides3"
+                                                         src="<%=car.getUrl4()%>">
 
                                                     <button class="image-button button-left" onclick="plusDivs(-1)">&#10094;
                                                     </button>

@@ -68,11 +68,11 @@
                         <a class="nav-link px-3" href="/admin?action=addNewCar">Add Car</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3" href="#">Cars</a>
+                        <a class="nav-link px-3" href="/admin?action=listBooking">List Booking</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3" href="#services">Services</a>
-                    </li>
+<%--                    <li class="nav-item">--%>
+<%--                        <a class="nav-link px-3" href="#services">Services</a>--%>
+<%--                    </li>--%>
                     <li class="nav-item">
 <%--                        <a class="nav-link px-3" href="/user?action=login">Logout</a>--%>
                         <button type="button" class="btn btn-outline-primary nav-button mx-3"
@@ -88,7 +88,7 @@
 </nav>
 
 <div align="center" style="margin-left: 10%; margin-right: 10%">
-    <caption><h1 style="padding-top: 100px">Lists of car</h1></caption>
+    <caption><h2 style="padding-top: 100px">Lists of car</h2></caption>
     <table class="table table-hover" border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 16px">
 
         <tr>

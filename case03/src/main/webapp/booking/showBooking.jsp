@@ -81,7 +81,7 @@
                 <div class="d-flex mt-5 mt-lg-0 ps-lg-5 align-items-center justify-content-center ">
                     <ul class="navbar-nav justify-content-end align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link px-3" href="#"> Welcome
+                            <a class="nav-link px-3" href="/user?action=login"> Welcome
                                 <b><%= user.getUsername()%>
                                 </b>
                             </a>

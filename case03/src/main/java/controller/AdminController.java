@@ -1,7 +1,9 @@
 package controller;
 
+import entity.Booking;
 import entity.Car;
 import repository.Impl.CarRepositoryImpl;
+import service.Impl.BookingServiceImpl;
 import service.Impl.CarServiceImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -35,9 +37,9 @@ public class AdminController extends HttpServlet {
             case "deleteCar":
                 showDeleteCarForm(request, response);
                 break;
-//            case "searchTypeByName":
-//                searchBrandByName(request, response);
-//                break;
+            case "listBooking":
+                listBooking(request, response);
+                break;
             default:
                 listCars(request, response);
                 break;
@@ -64,9 +66,9 @@ public class AdminController extends HttpServlet {
             case "deleteCar":
                 deleteCar(request, response);
                 break;
-//            case "searchBrandByName":
-//                searchBrandByName(request, response);
-//                break;
+            case "listBooking":
+                listBooking(request, response);
+                break;
             default:
                 listCars(request, response);
                 break;
@@ -83,9 +85,19 @@ public class AdminController extends HttpServlet {
             e.printStackTrace();
         }
     }
+    private void listBooking(HttpServletRequest request, HttpServletResponse response) {
+        List<Booking> bookingList = BookingServiceImpl.getInstance().findAllBooking();
+        request.setAttribute("bookingList", bookingList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/allBooking.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void showAddNewCar(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("car/addNewCar.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/addNewCar.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
@@ -97,7 +109,7 @@ public class AdminController extends HttpServlet {
         int carId = Integer.parseInt(request.getParameter("id"));
         Car car = CarServiceImpl.getInstance().selectCar(carId);
         request.setAttribute("car", car);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("car/editCar.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/editCar.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
@@ -109,7 +121,7 @@ public class AdminController extends HttpServlet {
         int carId = Integer.parseInt(request.getParameter("id"));
         Car car = CarServiceImpl.getInstance().selectCar(carId);
         request.setAttribute("car", car);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("car/deleteCar.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/deleteCar.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
@@ -132,7 +144,7 @@ public class AdminController extends HttpServlet {
 
         Car car = new Car(carBrand, carModel, carSeat, carRentalPrice, carAvailable, carDescribe, carURL, carURL2, carURL3, carURL4, carLocation);
         CarServiceImpl.getInstance().addNewCar(car);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("car/addNewCar.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/addNewCar.jsp");
         request.setAttribute("message", "Add New Car Successfully!");
         try {
             dispatcher.forward(request, response);

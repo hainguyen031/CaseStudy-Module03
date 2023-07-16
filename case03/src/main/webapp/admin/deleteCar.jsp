@@ -1,15 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: OS
-  Date: 7/10/2023
-  Time: 8:55 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Add Car</title>
+    <title>DELETE CAR</title>
     <!--vendor css ================================================== -->
     <link rel="stylesheet" type="text/css" href="css/vendor.css">
 
@@ -59,11 +53,11 @@
                         <a class="nav-link px-3" href="/admin?action=addNewCar">Add Car</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3" href="#">Cars</a>
+                        <a class="nav-link px-3" href="/admin?action=listBooking">List Booking</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3" href="#services">Services</a>
-                    </li>
+<%--                    <li class="nav-item">--%>
+<%--                        <a class="nav-link px-3" href="#services">Services</a>--%>
+<%--                    </li>--%>
                     <li class="nav-item">
                         <%--                        <a class="nav-link px-3" href="/user?action=login">Logout</a>--%>
                         <button type="button" class="btn btn-outline-primary nav-button mx-3"
@@ -78,85 +72,56 @@
     </div>
 </nav>
 
-
-<div align="center">
-    <form method="post" action="/admin?action=addNewCar">
+<div align="center" style="margin-left: 10%; margin-right: 10%">
+    <form method="post" action="/admin?action=deleteCar">
         <caption>
-            <h2 style="padding-top: 100px">Add New Car</h2>
+            <h2 style="padding-top: 100px">Delete Car</h2>
         </caption>
-        <table class="table table-hover" border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 16px; width: 60%">
+        <table class="table align-middle mb-0 bg-white" border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 16px; width: 60%">
 
-            <tr>
-                <th>Car brand:</th>
-                <td>
-                    <input type="text" name="brand" id="brand" size="45"/>
-                </td>
+            <c:if test="${car != null}">
+                <input type="hidden" name="id" value="<c:out value='${car.id}' />"/>
+            </c:if>
+            <tr style="text-align: center">
+                <th colspan="2"><h4>Car information</h4></th>
+
             </tr>
             <tr>
-                <th>Car model:</th>
+                <th>Car: </th>
                 <td>
-                    <input type="text" name="model" id="model" size="45"/>
+                    <b><c:out value="${car.brand}"/> <c:out value="${car.model}"/></b>
                 </td>
             </tr>
-            <tr>
-                <th>Numbers of seat:</th>
-                <td>
-                    <select class="form-select" id="seat" name="seat">
-                        <option value="4">4 seats</option>
-                        <option value="7">7 seats</option>
-                    </select>
-                </td>
-            </tr>
+
             <tr>
                 <th>Rental price:</th>
                 <td>
-                    <input type="text" name="price" id="price" size="45"/>
-                    <input type="hidden" value="true" name="available">
+                    <c:out value="${car.rentPrice}"/>
                 </td>
             </tr>
+
             <tr>
-                <th>Car location:</th>
+                <th>Numbers of seat:</th>
                 <td>
-                    <select class="form-select" id="location" name="location">
-                        <option value="Ha Noi">Ha Noi</option>
-                        <option value="Da Nang">Da Nang</option>
-                        <option value="Ho Chi Minh">Ho Chi Minh</option>
-                    </select>
+                    <c:out value="${car.seats}"/>
                 </td>
             </tr>
-            <tr>
-                <th>Images URL:</th>
-                <td>
-                    <input type="text" name="url" id="url" size="45"/>
-                </td>
-            </tr>
-            <tr>
-                <th>Images URL2:</th>
-                <td>
-                    <input type="text" name="url2" id="url2" size="45"/>
-                </td>
-            </tr>
-            <tr>
-                <th>Images URL3:</th>
-                <td>
-                    <input type="text" name="url3" id="url3" size="45"/>
-                </td>
-            </tr>
-            <tr>
-                <th>Images URL4:</th>
-                <td>
-                    <input type="text" name="url4" id="url4" size="45"/>
-                </td>
-            </tr>
+
             <tr>
                 <th>Describe:</th>
                 <td>
-                    <textarea name="describe" rows="4" cols="45"></textarea>
+                    <c:out value="${car.describe}"/>
+                </td>
+            </tr>
+            <tr>
+                <th>Images:</th>
+                <td>
+                    <img src="<c:out value="${car.url}"/>"  style="width: 300px; height: 200px;">
                 </td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <button type="submit" class="btn btn-secondary">Save</button>
+                    <button type="submit" class="btn btn-secondary">Confirm Delete</button>
                 </td>
             </tr>
         </table>
@@ -181,6 +146,5 @@
         </footer>
     </div>
 </section>
-
 </body>
 </html>

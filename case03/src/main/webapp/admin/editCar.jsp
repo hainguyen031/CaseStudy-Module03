@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>DELETE CAR</title>
+    <title>EDIT CAR</title>
     <!--vendor css ================================================== -->
     <link rel="stylesheet" type="text/css" href="css/vendor.css">
 
@@ -53,11 +53,11 @@
                         <a class="nav-link px-3" href="/admin?action=addNewCar">Add Car</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3" href="#">Cars</a>
+                        <a class="nav-link px-3" href="/admin?action=listBooking">List Booking</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3" href="#services">Services</a>
-                    </li>
+<%--                    <li class="nav-item">--%>
+<%--                        <a class="nav-link px-3" href="#services">Services</a>--%>
+<%--                    </li>--%>
                     <li class="nav-item">
                         <%--                        <a class="nav-link px-3" href="/user?action=login">Logout</a>--%>
                         <button type="button" class="btn btn-outline-primary nav-button mx-3"
@@ -72,20 +72,16 @@
     </div>
 </nav>
 
-<div align="center" style="margin-left: 10%; margin-right: 10%">
-    <form method="post" action="/admin?action=deleteCar">
+<div align="center">
+    <form method="post" action="/admin?action=editCar">
         <caption>
-            <h2 style="padding-top: 100px">Delete Car</h2>
+            <h2 style="padding-top: 100px">Edit Car</h2>
         </caption>
-        <table class="table align-middle mb-0 bg-white" border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 16px; width: 60%">
+        <table class="table table-hover" border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 16px; width: 60%">
 
             <c:if test="${car != null}">
                 <input type="hidden" name="id" value="<c:out value='${car.id}' />"/>
             </c:if>
-            <tr style="text-align: center">
-                <th colspan="2"><h4>Car information</h4></th>
-
-            </tr>
             <tr>
                 <th>Car: </th>
                 <td>
@@ -96,32 +92,54 @@
             <tr>
                 <th>Rental price:</th>
                 <td>
-                    <c:out value="${car.rentPrice}"/>
+                    <input type="text" name="rentPrice" size="45"
+                           value="<c:out value='${car.rentPrice}' />"
+                    />
                 </td>
             </tr>
-
-            <tr>
-                <th>Numbers of seat:</th>
-                <td>
-                    <c:out value="${car.seats}"/>
-                </td>
-            </tr>
-
             <tr>
                 <th>Describe:</th>
                 <td>
-                    <c:out value="${car.describe}"/>
+                    <input type="text" name="describe" size="45"
+                           value="<c:out value='${car.describe}' />"
+                    />
                 </td>
             </tr>
             <tr>
-                <th>Images:</th>
+                <th>Images URL:</th>
                 <td>
-                    <img src="<c:out value="${car.url}"/>"  style="width: 300px; height: 200px;">
+                    <input type="text" name="url" size="45"
+                           value="<c:out value='${car.url}' />"
+                    />
+                </td>
+            </tr>
+            <tr>
+                <th>Images URL2:</th>
+                <td>
+                    <input type="text" name="url2" size="45"
+                           value="<c:out value='${car.url2}' />"
+                    />
+                </td>
+            </tr>
+            <tr>
+                <th>Images URL3:</th>
+                <td>
+                    <input type="text" name="url3" size="45"
+                           value="<c:out value='${car.url3}' />"
+                    />
+                </td>
+            </tr>
+            <tr>
+                <th>Images URL4:</th>
+                <td>
+                    <input type="text" name="url4" size="45"
+                           value="<c:out value='${car.url4}' />"
+                    />
                 </td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <button type="submit" class="btn btn-secondary">Confirm Delete</button>
+                    <button type="submit" class="btn btn-secondary">Save Edit</button>
                 </td>
             </tr>
         </table>
