@@ -102,16 +102,25 @@ public class UserController extends HttpServlet {
         String customerPhone = request.getParameter("phone");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        User customer = new User(username, password, customerPhone, customerEmail);
-        if (!customer.getUsername().equals("") && !customer.getPassword().equals("") && !customer.getPhone().equals("") && !customer.getEmail().equals("")) {
-            customerService.registerNewCustomer(customer);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-            request.setAttribute("message", "Register Successfully!");
+        User customerFind = customerService.findCustomerByUsername(username);
+        User customer = new User(username, password, customerEmail, customerPhone);
+        if (customerFind != null) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("user/register.jsp");
+            request.setAttribute("message", "Username already exists, please register again!");
             dispatcher.forward(request, response);
         } else {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("user/register.jsp");
-            request.setAttribute("message", "Please input!");
-            dispatcher.forward(request, response);
+            if (!customer.getUsername().equals("") && !customer.getPassword().equals("") && !customer.getPhone().equals("") && !customer.getEmail().equals("")) {
+                customerService.registerNewCustomer(customer);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("user/login.jsp");
+                request.setAttribute("message", "Register Successfully!");
+                dispatcher.forward(request, response);
+            } else {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("user/register.jsp");
+                request.setAttribute("message", "Please register again!");
+                dispatcher.forward(request, response);
+            }
+
         }
+
     }
 }

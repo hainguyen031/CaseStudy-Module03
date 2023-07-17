@@ -80,12 +80,15 @@
                 <div class="d-flex mt-5 mt-lg-0 ps-lg-5 align-items-center justify-content-center ">
                     <ul class="navbar-nav justify-content-end align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link px-3" href="/user?action=login"> Welcome
+                            <a class="nav-link px-3" href="#"> Welcome
                                 <b><%= user.getUsername()%></b>
                             </a>
 
                         </li>
                     </ul>
+                    <button type="button" class="btn btn-outline-primary nav-button mx-3"
+                            onclick="window.location.href = '/user?action=login';"> Logout
+                    </button>
                 </div>
             </div>
         </div>
@@ -228,28 +231,66 @@
                                             <div class="modal-body" >
                                                 <!-- Ảnh xe -->
                                                 <div class="display-container">
+                            <%--===================================--%>
+<%--                                                    <img class="mySlides3"--%>
+<%--                                                         src="<%=car.getUrl()%>">--%>
+<%--                                                    <img class="mySlides3"--%>
+<%--                                                         src="<%=car.getUrl2()%>">--%>
+<%--                                                    <img class="mySlides3"--%>
+<%--                                                         src="<%=car.getUrl3()%>">--%>
+<%--                                                    <img class="mySlides3"--%>
+<%--                                                         src="<%=car.getUrl4()%>">--%>
 
-                                                    <img class="mySlides3"
-                                                         src="<%=car.getUrl()%>">
-                                                    <img class="mySlides3"
-                                                         src="<%=car.getUrl2()%>">
-                                                    <img class="mySlides3"
-                                                         src="<%=car.getUrl3()%>">
-                                                    <img class="mySlides3"
-                                                         src="<%=car.getUrl4()%>">
+<%--                                                    <button class="image-button button-left" onclick="plusDivs(-1)">&#10094;--%>
+<%--                                                    </button>--%>
+<%--                                                    <button class="image-button button-right" onclick="plusDivs(1)">&#10095;--%>
+<%--                                                    </button>--%>
 
-                                                    <button class="image-button button-left" onclick="plusDivs(-1)">&#10094;
-                                                    </button>
-                                                    <button class="image-button button-right" onclick="plusDivs(1)">&#10095;
-                                                    </button>
+<%--                                                    <div class="badge" style="width:80%">--%>
 
-                                                    <div class="badge" style="width:80%">
+<%--                                                        <span class="image-badge" onclick="currentDiv(1)"></span>--%>
+<%--                                                        <span class="image-badge" onclick="currentDiv(2)"></span>--%>
+<%--                                                        <span class="image-badge" onclick="currentDiv(3)"></span>--%>
+<%--                                                        <span class="image-badge" onclick="currentDiv(4)"></span>--%>
+<%--                                                    </div>--%>
+                            <%--==============================================--%>
+                                                <!-- Carousel -->
+                                                <div id="demo" class="carousel slide" data-bs-ride="carousel">
 
-                                                        <span class="image-badge" onclick="currentDiv(1)"></span>
-                                                        <span class="image-badge" onclick="currentDiv(2)"></span>
-                                                        <span class="image-badge" onclick="currentDiv(3)"></span>
-                                                        <span class="image-badge" onclick="currentDiv(4)"></span>
+                                                    <!-- Indicators/dots -->
+                                                    <div class="carousel-indicators">
+                                                        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                                                        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                                                        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                                                        <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
                                                     </div>
+
+                                                    <!-- The slideshow/carousel -->
+                                                    <div class="carousel-inner">
+                                                        <div class="carousel-item active">
+                                                            <img src="<%=car.getUrl()%>" alt="IMG1" class="d-block" style="width:100%; border-radius: 5%">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="<%=car.getUrl()%>" alt="IMG2" class="d-block" style="width:100%; border-radius: 5%">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="<%=car.getUrl()%>" alt="IMG3" class="d-block" style="width:100%; border-radius: 5%">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="<%=car.getUrl()%>" alt="IMG4" class="d-block" style="width:100%; border-radius: 5%">
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Left and right controls/icons -->
+                                                    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon"></span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon"></span>
+                                                    </button>
+                                                </div>
+
+                            <%-- ========================================                                                   --%>
                                                 </div>
                                                 <!-- Nội dung chi tiết xe -->
 

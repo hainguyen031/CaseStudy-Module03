@@ -50,8 +50,8 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
                 CallableStatement callableStatement = connection.prepareCall(ADD_NEW_CUSTOMER)) {
             callableStatement.setString(1, customer.getUsername());
             callableStatement.setString(2, customer.getPassword());
-            callableStatement.setString(3, customer.getPhone());
-            callableStatement.setString(4, customer.getEmail());
+            callableStatement.setString(3, customer.getEmail());
+            callableStatement.setString(4, customer.getPhone());
             callableStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
